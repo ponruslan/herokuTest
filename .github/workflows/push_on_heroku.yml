@@ -1,4 +1,7 @@
 name: CI
+env:
+  EMAIL: "some email"
+  KEY: "some key"
 
 on:
   push:
@@ -13,7 +16,7 @@ jobs:
       - name: Print test
         run : |
           echo "Hello from test"
-          echo "Heroku email: ${{ secrets.HEROKU_EMAIL }}" 
+          echo "Heroku email: ${{ env.EMAIL }}" 
     
   build:
     runs-on: ubuntu-latest
@@ -23,4 +26,4 @@ jobs:
     - name: Print build
       run : | 
         echo "Hello from build"
-        echo "Heroku api key: ${{ secrets.HEROKU_API_KEY }}"
+        echo "Heroku api key: ${{ env.KEY }}"
