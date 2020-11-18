@@ -39,3 +39,6 @@ jobs:
           app_name: dokaztest
           # Dokerfile path
           dockerfile_path: .docker/testHeroku.Dockerfile
+          options: -f testheroku .
+          
+          
