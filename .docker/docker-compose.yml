@@ -1,0 +1,13 @@
+version: '3'
+
+services:
+  application:
+    image: testheroku
+    container_name: testheroku
+    ports:
+      - 8080:8080
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "5"
