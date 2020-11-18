@@ -7,10 +7,16 @@ on:
     branches: [ master ]
     
 jobs:
-
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Print test
+        run: echo Hello from test
+    
   build:
     runs-on: ubuntu-latest
+    needs: [test]
     
     steps:
-    - name: Print hello message
-      run: echo Hello from git actions
+    - name: Print build
+      run: echo Hello from build
