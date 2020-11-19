@@ -24,6 +24,7 @@ jobs:
         run: chmod +x ./gradlew
 
       - name: Deploy Docker Image to Heroku App
+        id: heroku
         uses: jctaveras/heroku-deploy@v2.1.1
         with:
           email: ${{ secrets.HEROKU_EMAIL }}
