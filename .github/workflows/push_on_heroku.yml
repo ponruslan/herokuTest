@@ -27,7 +27,15 @@ jobs:
         id: heroku
         uses: mtsmachado8/heroku-deploy@v2.0.3
         with:
-          email: ${{ secrets.HEROKU_EMAIL }}
-          api_key: ${{ secrets.HEROKU_API_KEY }}
+          email:
+          api_key:
           app_name: dokaztest
           dockerfile_path: docker
+
+      - name: Build, Push and Release a Docker container to Heroku.
+        uses: gonuit/heroku-docker-deploy@v1.2.0
+        with:
+          heroku_app_name: dokaztest
+          email: ${{ secrets.HEROKU_EMAIL }}
+          heroku_api_key: ${{ secrets.HEROKU_API_KEY }}
+          dockerfile_directory: docker
