@@ -31,4 +31,3 @@ jobs:
           api_key: ${{ secrets.HEROKU_API_KEY }}
           app_name: dokaztest
           dockerfile_path: .
-          options: -f
