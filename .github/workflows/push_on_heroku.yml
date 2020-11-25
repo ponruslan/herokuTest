@@ -27,13 +27,13 @@ jobs:
         run: ./gradlew build
 
       - name: Build the tagged Docker image
-        run: docker build -f .docker/testHeroku.Dockerfile -t testheroku .
+        run: docker build -f Dockerfile -t testheroku .
 
       - name: Build, Push and Deploy to Heroku
         id: heroku
         uses: snithyanantham/docker-compose-multiple-apps-heroku-deploy@v1.0
         with:
-        email: ${{ secrets.HEROKU_EMAIL }}
-        api_key: ${{ secrets.HEROKU_API_KEY }}
-        docker_compose_file: '.docker/docker-compose.yml'
-        heroku_apps: '[{"imagename":"testheroku","appname":"dokaztest","apptype":"web"}]'
+          email: ${{ secrets.HEROKU_EMAIL }}
+          api_key: ${{ secrets.HEROKU_API_KEY }}
+          docker_compose_file: '.docker/docker-compose.yml'
+          heroku_apps: '[{"imagename":"testheroku","appname":"dokaztest","apptype":"web"}]'
