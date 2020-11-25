@@ -27,7 +27,7 @@ jobs:
         run: ./gradlew build
 
       - name: Build the tagged Docker image
-        run: docker build -f Dockerfile -t testheroku .
+        run: docker build -f .docker/Dockerfile -t testheroku .
 
       - name: Build, Push and Deploy to Heroku
         id: heroku
