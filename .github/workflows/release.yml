@@ -9,7 +9,9 @@ jobs:
   release:
     runs-on: ubuntu-latest
     steps:
-      - id: compute_tag
-        uses: craig-day/compute-tag@v10
+      - uses: actions/checkout@v2
+      - uses: kyoh86/git-vertag-action@v1
         with:
-          github_token: ${{ github.token }}
+          method: minor  # "major", "minor", "patch" or "get"
+        id: vertag
+      - run: echo ${{ steps.vertag.outputs.vertag }}
