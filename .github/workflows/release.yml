@@ -3,17 +3,13 @@ on:
   push:
     branches:
       - master
-      - release
 jobs:
   build:
     runs-on: ubuntu-latest
+
     steps:
-      - uses: actions/checkout@v2
+      - name: Tag commit
+        uses: tvdias/github-tagger@v0.0.1
         with:
-          fetch-depth: '0'
-      - name: Bump version and push tag
-        uses: anothrNick/github-tag-action@1.26.0
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          DEFAULT_BUMP: patch
-          INITIAL_VERSION: 0.0.0
+          repo-token: "${{ secrets.GITHUB_TOKEN }}"
+          tag: "my_tag"
