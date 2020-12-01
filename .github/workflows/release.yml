@@ -6,7 +6,6 @@ on:
       - develop
 jobs:
   build:
-
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -16,6 +15,4 @@ jobs:
         uses: anothrNick/github-tag-action@1.26.0
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          DEFAULT_BUMP: 'patch'
-          RELEASE_BRANCHES: 'master, develop'
-          INITIAL_VERSION: '0.0.0'
+          DEFAULT_BUMP: patch
