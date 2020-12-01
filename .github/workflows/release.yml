@@ -6,12 +6,11 @@ on:
       - develop
 jobs:
   build:
-
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-      - name: Bump version and push tag
-        id: tag_version
-        uses: mathieudutour/github-tag-action@v5
+      - name: Checkout
+        uses: actions/checkout@v2
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
+          fetch-depth: 0
+      - name: Determine Version
+        uses: gittools/actions/gitversion/execute@v0.9.7
