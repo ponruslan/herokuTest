@@ -8,7 +8,5 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@master
-      - name: Bump version and push tag
-        uses: wiktorj/github-tag-action@master
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Github Tag Bump and `latest` tag update
+        uses: WiktorJ/github-tag-action@2.0.0
