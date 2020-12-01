@@ -22,7 +22,7 @@ jobs:
         uses: HardNorth/github-version-generate@v1.0.2
         with:
           version-source: variable
-          version: 1
+          version: '1'
 
       - name: Grant execute permission for gradlew
         run: chmod +x gradlew
