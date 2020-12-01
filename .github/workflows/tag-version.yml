@@ -1,4 +1,4 @@
-name: Action Jackson
+name: Tagging
 on:
   push:
     branches:
@@ -16,4 +16,8 @@ jobs:
           fetch-depth: 0
       - name: Version
         id: version
-        uses: juliansangillo/tag-version@v1.5
+        uses: juliansangillo/tag-version@v1
+        with:
+          production-branch: master
+          test-branch: test
+          dev-branch: develop
