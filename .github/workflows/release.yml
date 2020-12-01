@@ -9,9 +9,14 @@ jobs:
   release:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-      - uses: kyoh86/git-vertag-action@v1
+      - name: Checkout
+        uses: actions/checkout@v2
         with:
-          method: minor  # "major", "minor", "patch" or "get"
-        id: vertag
-      - run: echo ${{ steps.vertag.outputs.vertag }}
+          fetch-depth: 0
+
+      - name: tag-version
+        uses: juliansangillo/tag-version@v1.5
+        with:
+          production-branch: master
+          test-branch: test
+          dev-branch: develop
