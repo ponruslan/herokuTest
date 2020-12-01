@@ -1,23 +1,11 @@
-name: Tagging
+name: CI
 on:
   push:
     branches:
-      - test
-      - develop
       - master
 jobs:
-  autotag:
+  ci:
     runs-on: ubuntu-latest
-    name: Auto Tagging
     steps:
-      - name: Checkout
-        uses: actions/checkout@v2
-        with:
-          fetch-depth: 0
-      - name: Version
-        id: version
-        uses: juliansangillo/tag-version@v1
-        with:
-          production-branch: master
-          test-branch: test
-          dev-branch: develop
+      - name: tag-version
+        uses: juliansangillo/tag-version@v1.5
