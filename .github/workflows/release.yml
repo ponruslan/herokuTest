@@ -1,12 +1,26 @@
-name: Bump version
+name: Tag
+
 on:
-  push:
-    branches:
-      - master
-      - develop
+  workflow_dispatch:
+    inputs:
+      version:
+        description: 'Release version (e.g. v0.1.0)'
+        required: true
+      message:
+        description: 'Tag message'
+        required: true
+
 jobs:
-  build:
-    runs-on: ubuntu-latest
+  create-tag:
+    runs-on: ubuntu-18.04
+
     steps:
-      - name: Auto Tagger
-        uses: VegetableGarden/beet@0.0.3
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Create Tag
+        uses: negz/create-tag@v1
+        with:
+          version: ${{ github.event.inputs.version }}
+          message: ${{ github.event.inputs.message }}
+          token: ${{ secrets.GITHUB_TOKEN }}
