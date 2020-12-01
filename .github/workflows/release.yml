@@ -3,12 +3,20 @@ on:
   push:
     branches:
       - master
+      - develop
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - name: Tag commit
-        uses: tvdias/github-tagger@v0.0.1
+      - name: Checkout
+        uses: actions/checkout@v2
         with:
-          repo-token: "${{ secrets.GITHUB_TOKEN }}"
-          tag: "my_tag"
+          fetch-depth: 0
+
+      - name: Version
+        id: version
+        uses: juliansangillo/tag-version@v1
+        with:
+          production-branch: master
+          test-branch: test
+          dev-branch: develop
