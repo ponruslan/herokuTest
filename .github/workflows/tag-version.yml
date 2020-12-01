@@ -1,21 +1,19 @@
-name: Tag
+name: Action Jackson
 on:
   push:
-    branches: [ master ]
-  pull_request:
-    branches: [ master ]
-
+    branches:
+      - test
+      - develop
+      - master
 jobs:
-  tag-version:
-    - name: Checkout
-      uses: actions/checkout@v2
-      with:
-        fetch-depth: 0
-
-    - name: Version
-      id: version
-      uses: juliansangillo/tag-version@v1
-      with:
-        production-branch: master
-        test-branch: test
-        dev-branch: develop
+  autotag:
+    runs-on: ubuntu-latest
+    name: Auto Tagging
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+      - name: Version
+        id: version
+        uses: juliansangillo/tag-version@v1.5
