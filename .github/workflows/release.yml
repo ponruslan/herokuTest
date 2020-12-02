@@ -14,4 +14,4 @@ jobs:
         uses: mathieudutour/github-tag-action@v5
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-        append_to_pre_release_tag: 'BUILD'
+          append_to_pre_release_tag: 'BUILD'
