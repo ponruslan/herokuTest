@@ -1,4 +1,4 @@
-name: Bump version
+name: Bump version, build and push to heroku
 on:
   push:
     branches:
@@ -16,10 +16,9 @@ jobs:
         uses: mathieudutour/github-tag-action@v5
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          create_annotated_tag: true
           append_to_pre_release_tag: 'RC'
 
-      - name: Write value to Properties-file
+      - name: Write tag to Properties-file
         uses: christian-draeger/write-properties@1.0.1
         with:
           path: './src/main/resources/application.properties'
