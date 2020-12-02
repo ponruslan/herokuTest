@@ -16,13 +16,13 @@ jobs:
         uses: mathieudutour/github-tag-action@v5
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          append_to_pre_release_tag: RC
+          append_to_pre_release_tag: 'RC'
 
       - name: Write tag to Properties-file
         uses: christian-draeger/write-properties@1.0.1
         with:
-          path: ./src/main/resources/application.properties
-          property: build.version
+          path: './src/main/resources/application.properties'
+          property: 'build.version'
           value: ${{ steps.tag_version.outputs.new_tag }}
 
       - name: Set up JDK 11
@@ -45,5 +45,5 @@ jobs:
         with:
           email: ${{ secrets.HEROKU_EMAIL }}
           api_key: ${{ secrets.HEROKU_API_KEY }}
-          docker_compose_file: .docker/docker-compose.yml
-          heroku_apps: [{"imagename":"testheroku","appname":"dokaztest","apptype":"web"}]
+          docker_compose_file: '.docker/docker-compose.yml'
+          heroku_apps: '[{"imagename":"testheroku","appname":"dokaztest","apptype":"web"}]'
