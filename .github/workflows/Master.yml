@@ -1,10 +1,9 @@
 name: Bump version
-
 on:
   push:
     branches:
       - master
-
+      - release
 jobs:
   build:
     runs-on: ubuntu-latest
