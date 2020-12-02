@@ -6,7 +6,6 @@ on:
 name: test workflow
 jobs:
   build:
-
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
