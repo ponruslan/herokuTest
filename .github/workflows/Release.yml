@@ -1,0 +1,49 @@
+name: Bump version, build and push to heroku
+on:
+  push:
+    branches:
+      - release
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Bump version and push tag
+        id: tag_version
+        uses: mathieudutour/github-tag-action@v5
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          append_to_pre_release_tag: 'RC'
+
+      - name: Write tag to Properties-file
+        uses: christian-draeger/write-properties@1.0.1
+        with:
+          path: './src/main/resources/application.properties'
+          property: 'build.version'
+          value: ${{ steps.tag_version.outputs.new_tag }}
+
+      - name: Set up JDK 11
+        uses: actions/setup-java@v1
+        with:
+          java-version: 1.11
+
+      - name: Change wrapper permissions
+        run: chmod +x ./gradlew
+
+      - name: Run build with Gradle(check styles, run tests)
+        run: ./gradlew build
+
+      - name: Build the tagged Docker image
+        run: docker build -f .docker/Dockerfile -t testheroku .
+
+      - name: Build, Push and Deploy to Heroku
+        id: heroku
+        uses: snithyanantham/docker-compose-multiple-apps-heroku-deploy@v1.0
+        with:
+          email: ${{ secrets.HEROKU_EMAIL }}
+          api_key: ${{ secrets.HEROKU_API_KEY }}
+          docker_compose_file: '.docker/docker-compose.yml'
+          heroku_apps: '[{"imagename":"testheroku","appname":"dokaztest","apptype":"web"}]'
