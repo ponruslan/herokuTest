@@ -36,7 +36,7 @@ jobs:
         run: chmod +x ./gradlew
 
       - name: Run build with Gradle(check styles, run tests)
-        run: ./gradlew build -Pversion=some-version
+        run: ./gradlew build -Pversion=${{ steps.tag_version.outputs.new_tag }}
 
       - name: Build the tagged Docker image
         run: docker build -f .docker/Dockerfile -t testheroku .
