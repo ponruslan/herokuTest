@@ -20,12 +20,12 @@ jobs:
           pre_release_branches: release
           append_to_pre_release_tag: 'RC'
 
-      - name: Write tag to Properties-file
-        uses: christian-draeger/write-properties@1.0.1
-        with:
-          path: './src/main/resources/application.properties'
-          property: 'build.version'
-          value: ${{ steps.tag_version.outputs.new_tag }}
+#      - name: Write tag to Properties-file
+#        uses: christian-draeger/write-properties@1.0.1
+#        with:
+#          path: './src/main/resources/application.properties'
+#          property: 'build.version'
+#          value: ${{ steps.tag_version.outputs.new_tag }}
 
       - name: Set up JDK 11
         uses: actions/setup-java@v1
@@ -36,7 +36,7 @@ jobs:
         run: chmod +x ./gradlew
 
       - name: Run build with Gradle(check styles, run tests)
-        run: ./gradlew build
+        run: ./gradlew build -Pversion=${{ steps.tag_version.outputs.new_tag }}e
 
       - name: Build the tagged Docker image
         run: docker build -f .docker/Dockerfile -t testheroku .
